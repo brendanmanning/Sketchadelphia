@@ -1,339 +1,455 @@
+<!--
+    
+{} 
+|| 
+||   .,,;;;;;;,,.. 
+||.;;;;;;*;;;;;;;*;;, ..,,;;;;;;%%%%%, 
+||';*;;;;;;;;*;;;;;;,::*::;;;*;;%%%%%%>>%%%%%,                 .; 
+|| ';;;;;*;;;;;;;;*;;,:::::*;;;;;@@@##>>%%%%%%,        ..,,;%%%%' 
+||  ;*;;;;;;;;*;;;;;;,::*;:;;;;*;@@@@##ooO0@@##>>%%%%%%%%%%%%%%' 
+||  ;;;;;;*;;;;;;;;*;;,:;:::*;;;;%%%%%%ooO0@@##>>%%%%%%%%%%a@@' 
+||  ;;*;;;;;;;;;*;;;;;,::*;::;;;*;%%%%%%>>%%%%%%ooO@@@@@@@@@@@ 
+||  ;;;;;;*;;;;;;;;*;;,:::::;*;;;;@@@@##>>%%%%%%%ooO@@@@@@@@%% 
+||  ;;*;;;;;;;;;*;;;;;;,::*;:;;;*;@@@@@##ooO0@@##>>%%%%%%%%%%% 
+||  ;;;;;;;*;;;;;;;*;;;,:::::*;;;;;%%%%%%ooO0@@@##>>%%%%%%%%a@, 
+||  ;;;*;;;;;;;;*;;;;;;,::*:;;;;;*;%%%%%%%>>%%%%%%%%ooO@@@@@@@@ 
+||  ;;;;;;;*;;;;;;;;*;;;,::::;*;;;;@@@@@##>>%%%%%%%%%ooO@@@@@%%' 
+||  ;;*;;;;;;;;*;;;;;;;;,::*:;;;:;*;@@@@@##ooO0@@@@##>>%%%%%%%% 
+||  ;;;;;;;*;;;;;;*;;;;*;,::::;*;;;;;%%%%%%ooO00@@@@##>>%%%%%a@ 
+||  ;*;;a@@@#######@@@@@a,:::*;;;;;;*;%%%%%%>>%%%%%%%%%ooO@@@@@, 
+||  ;;@@@@@@#######@@@@@##ooO00@@@@@@@@@@@##>>%%%%%%%%%%ooO@@@%% 
+||  a@@@%%%%%%%%%%%%%%%%%%ooO00@@@@@@@@@@@@##ooO0@@@@##>>%%%%%%% 
+||  @@%%%%%%%%%%%%%%%%%%%%%>>%%%%%%%%%%%%%%%%ooO00@@@@##>>%%%a@@ 
+||  %%%%a@@##########@@@@##>>%%%%%%%%%%%%%%%%%>>%%%%%%%%%ooO@@@a 
+||  %%@@@@@##########@@@@@##ooO0@@@@@@@@@@@@##>>%%%%%%%%%%ooO@%% 
+||  a@@@%%%%%%%%%%%%%%%%%%%%ooO0@@@@@@@@@@@@@##ooO0@@@@##>>%%%%%. 
+||  @@%%%%%%%%%%%%%%%%%%%%%%%>>%%%%%%%%%%%%%%%%ooO0@@@@@##>>%%%a@ 
+||  %%%%a@@############@@@@##>>%%%%%%%%%%%%%%%%%>>%%%%%%%%%%ooO@@a 
+||  %%@@@@@############@@@@@##ooO0@@@@@@@@@@@@##>>%%%%%%%%%%%ooO%% 
+||  a@@@%%%%%%%%%%%%%%%%%%%%%%ooO0@@@@@@@@@@@@@##ooO0@@@@##%>>%%%% 
+||  @@%%%%%%%%%%%%%%%%%%%%%%%%%>>%%%%%%%%%%%%%%%%ooO0@@@@@##>>%%a@ 
+|| .%%%'                        `>%%%%%%%%%%%%%%%%>>%%%%%%%%%ooO@@, 
+||.%%                                             `>%%%%%%%%%ooO%%% 
+||'                                                          `%%%%% 
+||                                                            `%%' 
+|| 
+|| 
+|| 
+||   MADE WITH <3 IN THE CITY OF LOVE:
+||   PHILADELPHIA, PENNSYLVANIA, USA
+|| 
+||   
+||   
+||   
+|| 
+|| 
+|| 
+--
+
+-->
+
 <html>
-    <head>
-        <title>Sketchadelphia</title>
-        
-        <link rel="icon" 
-      type="image/svg" 
-      href="https://image.flaticon.com/icons/svg/206/206868.svg">
-        
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-        <meta charset="utf-8">
-        
-        <script src="lib/polyline.js"></script>
-    
-        <style>
-            #map {
-                height: 100%;
-            }
-            #controls {
-                position: fixed;
-                z-index: 1000;
-            }
-            #controls > input {
-                margin-top: 16px;
-                margin-left: 16px;
-                width: 200px;
-                height: 40px;
-                border-radius: 2px;
-                background-color: white;
-                border-color: transparent;
-                font-size: 14px;
-            }
-            html, body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-        </style>
-    </head>
-    <body>
-    
-        <div id="controls">
-            <input type="text" placeholder="City Hall">Strong</input>
-        </div>
-        <div id="map"></div>
-        
-        
-    </body>
-    <script>
-        
-      var polylines = [];
 
-      function initMap() {
-        var myLatLng = {lat: 39.9816, lng: -75.1494};
-          
-        directionsService = new google.maps.DirectionsService();
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: myLatLng,
-            disableDefaultUI: true,
-            styles: [
-  {
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#212121"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#212121"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.country",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#9e9e9e"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.land_parcel",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.locality",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#bdbdbd"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#181818"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#001000"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#616161"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#1b1b1b"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#2c2c2c"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#8a8a8a"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#373737"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#3c3c3c"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway.controlled_access",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#4e4e4e"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#616161"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#000000"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#3d3d3d"
-      }
-    ]
+<head>
+    <title>Sketchadelphia</title>
+
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="mainstyle.css">
+
+    <!-- Mobile fix -->
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+    <!-- Importing 3rd party libraries -->
+    <script src="lib/polyline.js"></script>
+
+    <!-- Importing my own JS -->
+    <script src="src/Config.js"></script>
+
+    <style>
+
+        /* label focus color */
+ .input-field input:focus + label {
+   color: rgb(220,220,220) !important;
+ }
+                       
+             .material-icons.active {
+  color: rgb(220,220,220) !important;
   }
-]
-        });
-          
+ /* label underline focus color */
+ .row .input-field input:focus {
+   border-bottom: 1px solid rgb(220,220,220) !important;
+   box-shadow: 0 1px 0 0 rgb(220,220,220) !important
+ }
+        </style>
 
-          plotDirections("1226 Spring Valley Lane 19380", "1300 Cecil B Moore")
-          
-      }
-        
-     function plotDirections(from, to) {
+</head>
 
-         clearPolylines();
-         
-         var request = {
-            origin: from,
-            destination: to,
-            travelMode: 'DRIVING'
+<body>
+
+    <!-- FAB -->
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red sidenav-trigger" href="#" data-target="slide-out">
+            <i class="large material-icons">explore</i>
+        </a>
+    </div>
+
+    <!-- Side Nav -->
+    <ul id="slide-out" class="sidenav">
+
+        <nav>
+            <div class="nav-wrapper" style="background-color: #0d47a1; height: 64px;">
+                <a href="#" class="brand-logo" style="font-size: 21px; margin-left: 8px;">Sketchadelphia</a>
+            </div>
+        </nav>
+
+
+        <div class="row" style="background-color: #2196f3; height: calc(100% - 14px); overflow: hidden">
+            <div class="col s12">
+                <div class="nav-content" style="color: white; font-weight: bold;">
+                    <p>How sketchy is your next drive through Philly??</p>
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">bubble_chart</i>
+                    <input type="text" id="fromInput" oninput="inputUpdated()" class="autocomplete" placeholder="Start">
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">place</i>
+                    <input type="text" id="toInput" oninput="inputUpdated()" class="autocomplete" placeholder="Destination">
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="input-field col s12">
+                    <button id="directionsButton" onclick="routePressed()" class="btn waves-effect waves-light" type="submit" name="action" disabled>Go
+                        <i class="material-icons right">directions</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </ul>
+
+
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+
+    <!-- Statistics Side Bar -->
+    <ul id="statistics" class="collapsible" style="display: none">
+        <li>
+            <div id="sketchFactorStatHeader" class="collapsible-header"><center><span id="sketchFactorStat">123%</span><br><span id="sketchFactorExplanationStat">crimes reported  along this route.</span></center></div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">settings</i>Tweaks</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">info_outline</i>About</div>
+            <div class="collapsible-body"><div style="overflow: auto; display: block"><p>Hi! I'm <a href="https://github.com/brendanmanning">Brendan Manning</a>, a Computer Science & Physics major at Temple University.</p><p>I created Sketchadelphia after a sketchy Uber ride through North Philadelphia. This interactive demonstration is meant to that companies like Uber and Lyft should factor rider safety into their algorithms.</p><p>If you are from a tech company looking to incorportate Sketchadelphia features into your app, please <a href="mailto:tuj97064@temple.edu">send me an email</a></p><p>If you are a recruiter, lets <a href="https://www.linkedin.com/in/brendan-m-544823a2/">Connect on Linkedin!</a></p></div></div>
+        </li>
+    </ul>
+
+    <!-- Map View -->
+    <div id="map"></div>
+
+
+</body>
+<script>
+    
+    var json = {};
+    
+    var polylines = [];
+    var polygons = [];
+    var markers = [];
+    
+    
+    activeGrid = -1;
+    
+    function initMap() {
+        var myLatLng = {
+            lat: 39.9816,
+            lng: -75.1494
         };
-  
-        directionsService.route(request, function(result, status) {
-            if (status == 'OK') {
-                
-                var route = result['routes'][0];
-                var legs = route['legs'];
-                
-                for(var l = 0; l < legs.length; l++) {
-                    var steps = legs[l]['steps'];
-                    for (var s = 0; s < steps.length; s++) {
-                        
-                        var path = decodePolylineString(steps[s]['polyline']['points']);
-                        var polyline = new google.maps.Polyline({
-                            path: path,
-                            geodesic: true,
-                            strokeColor: 'rgb(50,100,150)',
-                            strokeOpacity: 1.0,
-                            strokeWeight: 2
-                        });
-          
-                        polyline.setMap(map);
-                    }
-                }
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: myLatLng,
+            disableDefaultUI: true,
+            style: getGoogleMapsStyle(),
+        });
+    }
+    
+    function inputUpdated() {
+        var from = document.getElementById("fromInput").value;
+        var to = document.getElementById("toInput").value;
+        var directionsButton = document.getElementById("directionsButton");
+        directionsButton.disabled = from.length == 0 || to.length == 0;
+    }
+
+    function routePressed() {
+        
+        // First clear everything we already did
+        reset();
+        
+        // Now get the to and from
+        var from = document.getElementById("fromInput").value;
+        var to = document.getElementById("toInput").value;
+        
+        // Now map it
+        fetch('http://10.109.205.50:4567/directions?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                'Access-Control-Allow-Origin':'*'
+            }
+        }).then(function(response) {
+            return response.json();
+        }).then(function(myjson) {
+            json = myjson;
+            
+            if(json['success']) {
+                presentRoute();
+            } else {
+                M.toast({html: json['message']})
+            }
+        }).catch(function() {
+            M.toast({html: 'An unknown error occured.'});
+            M.toast({html: 'Are you sure you have internet connection?'});
+        });
+    }
+    
+    function presentRoute() {
+        plotDirections(json['googleResponse']);
+        showRouteStatistics(json);
+        plotGrids(json);
+    }
+    
+    function showRouteStatistics() {
+        document.getElementById("statistics").style.display = "block";
+        document.getElementById("sketchFactorStat").innerHTML = numberFormat(json['reportedIncidents']);
+        document.getElementById("sketchFactorExplanationStat").innerHTML = "crimes reported along this route (since 2017).";
+    }
+    
+    function showGridStatistics() {
+        document.getElementById("statistics").style.display = "block";
+        document.getElementById("sketchFactorStat").innerHTML = numberFormat(json['grids'][activeGrid]['incidents'].length);
+        document.getElementById("sketchFactorExplanationStat").innerHTML = "crimes reported in this segment of your trip (since 2017).";
+    }
+
+    function plotDirections() {
+        var route = json['googleResponse']['routes'][0];
+        var legs = route['legs'];
+
+        for (var l = 0; l < legs.length; l++) {
+            var steps = legs[l]['steps'];
+            for (var s = 0; s < steps.length; s++) {
+
+                var path = decodePolylineString(steps[s]['polyline']['points']);
+                var polyline = new google.maps.Polyline({
+                    path: path,
+                    geodesic: true,
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+
+                polyline.setMap(map);
+            }
+        }
+    }
+    
+    function plotGrids() {
+        
+        var blockWidth = json['blockWidth'];
+        var blockHeight = json['blockHeight'];
+        for(var g = 0; g < json['grids'].length; g++) {
+            var grid = json['grids'][g];
+            var topLeft = [
+                grid['topLeft']['lat'],
+                grid['topLeft']['lon']
+            ];
+            var coords = [
+                new google.maps.LatLng(topLeft[0], topLeft[1]),
+                new google.maps.LatLng(topLeft[0], topLeft[1] + blockWidth),
+                new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1] + blockWidth),
+                new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1])
+            ];
+            var polygon = new google.maps.Polygon({
+                paths: coords,
+                strokeColor: "rgb(40,40,40)",
+                strokeOpacity: 1,
+                strokeWeight: 1,
+                fillColor: "rgb(40,40,40)",
+                fillOpacity: 0.35,
+                index: g
+            });
+            google.maps.event.addListener(polygon, 'click', function (event) {
+                toggleIncidents(this.index)
+            });
+            polygons.push(polygon);
+            polygon.setMap(map);
+        }
+        
+    }
+    
+    function toggleIncidents(gridIndex) {
+        
+        if(activeGrid == -1) {
+            activeGrid = gridIndex;
+            showIncidents(activeGrid);
+            showGridStatistics();
+            
+            map.setCenter({
+                lat: json['grids'][gridIndex]['topLeft']['lat'] - (0.5 * json['blockHeight']),
+                lng: json['grids'][gridIndex]['topLeft']['lon'] + (0.5 * json['blockWidth'])
+            });
+            map.setZoom(17);
+            
+            return;
+        }
+     
+        if(activeGrid != -1) {
+            activeGrid = -1;
+            clearMarkers();
+            showRouteStatisticsf();
+            
+            map.setZoom(12);
+            
+            return;
+        }
+        
+    }
+    
+    function showIncidents(gridIndex) {
+        
+        var incidents = json['grids'][gridIndex]['incidents'];
+        for(var i = 0; i < incidents.length; i++) {
+            var incident = incidents[i]
+            new google.maps.Marker({
+                position: {
+                    lat: incident['coordinates']['lat'],
+                    lng: incident['coordinates']['lon']
+                }, 
+                map: map
+            }).addListener('click', function() {
+                  M.toast({html: incident['description'].toUpperCase()})
+            });
+        }
+    }
+    
+    function decodePolylineString(str) {
+        var polygonsAsTwoDArray = polyline.decode(str);
+        var polygonsAsArrayOfObjects = [];
+        for (var i = 0; i < polygonsAsTwoDArray.length; i++) {
+            polygonsAsArrayOfObjects.push({
+                lat: polygonsAsTwoDArray[i][0],
+                lng: polygonsAsTwoDArray[i][1]
+            });
+        }
+        console.log(JSON.stringify(polygonsAsArrayOfObjects));
+        return polygonsAsArrayOfObjects;
+    }
+    
+    function reset() {
+        clearPolylines();
+        clearPolygons();
+        clearMarkers();
+        
+        json = {};
+        activeGrid = -1;
+    }
+
+    function clearPolylines() {
+        for (var p = 0; p < polylines.length; p++) {
+            polylines[p].setMap(null);
+        }
+        polylines.length = 0;
+    }
+    
+    function clearPolygons() {
+        for (var p = 0; p < polygons.length; p++) {
+            polygons[p].setMap(null);
+        }
+        polygons.length = 0;
+    }
+    
+    function clearMarkers() {
+        for(var m = 0; m < markers.length; m++) {
+            markers[m].setMap(null);
+        }
+        markers.length = 0;
+    }
+    
+    const numberFormat = (x) => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap">
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems, undefined);
+        
+        for (var e = 0; e < elems.length; e++) {
+            var instance = M.Sidenav.getInstance(elems[e]);
+            instance.open();
+        }
+        
+    });
+    document.getElementById("directionsButton").addEventListener("click", function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems, undefined);
+        
+        for (var e = 0; e < elems.length; e++) {
+            var instance = M.Sidenav.getInstance(elems[e]);
+            instance.close();
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.fixed-action-btn');
+        var instances = M.FloatingActionButton.init(elems, undefined);
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, undefined);
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, undefined);
+
+        for (var e = 0; e < elems.legth; e++) {
+            var instance = M.Modal.getInstance(elems[e]);
+            instance.open();
+        }
+
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.autocomplete');
+        var instances = M.Autocomplete.init(elems, {
+            data: {
+                "Temple University": "https://pbs.twimg.com/profile_images/999732458470883328/Z7Q58gaZ_400x400.jpg",
+                "Drexel University": "https://drexel.edu/~/media/Images/identity/pageLogos/socialmedia/Drexel_social_informal_yellow_twitter.ashx?la=en",
+                "Independence Hall": 'http://states.phillipmartin.info/pennsylvania/pennsylvania_liberty_hall.png',
+                "Citizens Bank Park": 'https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Philadelphia_Phillies.svg/1200px-Philadelphia_Phillies.svg.png'
             }
         });
-         
-         var squareCoords = [
-            new google.maps.LatLng(39.9816, -75.1494),
-            new google.maps.LatLng(39.9816, -75.14935),
-            new google.maps.LatLng(39.98165, -75.14935),
-            new google.maps.LatLng(39.98165, -75.1494),
-        ];
+    });
 
-        mapsquare = new google.maps.Polygon({
-  paths: squareCoords,
-  strokeColor: "#FF0000",
-  strokeOpacity: 1,
-  strokeWeight: 1,
-  fillColor: "#FF0000",
-  fillOpacity: 0.35
- });
+</script>
 
- mapsquare.setMap(map);
-     }
-        
-        function decodePolylineString(str) {
-            var polygonsAsTwoDArray = polyline.decode(str);
-            var polygonsAsArrayOfObjects = [];
-            for(var i = 0; i < polygonsAsTwoDArray.length; i++) {
-                polygonsAsArrayOfObjects.push({
-                    lat: polygonsAsTwoDArray[i][0],
-                    lng: polygonsAsTwoDArray[i][1]
-                })
-            }
-            return polygonsAsArrayOfObjects;
-        }
-        
-        function clearPolylines() {
-            for(var p = 0; p < polylines.length; p++) {
-                polylines[p].setMap(null);
-            }
-            polylines.length = 0;
-        }
-        //src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap&"
-    </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap">
-    </script>
 </html>
