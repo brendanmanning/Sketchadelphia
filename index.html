@@ -45,7 +45,6 @@
 || 
 || 
 --
-
 -->
 
 <html>
@@ -72,7 +71,6 @@
     <script src="src/Config.js"></script>
 
     <style>
-
         /* label focus color */
  .input-field input:focus + label {
    color: rgb(220,220,220) !important;
@@ -199,7 +197,6 @@
         var directionsButton = document.getElementById("directionsButton");
         directionsButton.disabled = from.length == 0 || to.length == 0;
     }
-
     function routePressed() {
         
         // First clear everything we already did
@@ -249,15 +246,12 @@
         document.getElementById("sketchFactorStat").innerHTML = numberFormat(json['grids'][activeGrid]['incidents'].length);
         document.getElementById("sketchFactorExplanationStat").innerHTML = "crimes reported in this segment of your trip (since 2017).";
     }
-
     function plotDirections() {
         var route = json['googleResponse']['routes'][0];
         var legs = route['legs'];
-
         for (var l = 0; l < legs.length; l++) {
             var steps = legs[l]['steps'];
             for (var s = 0; s < steps.length; s++) {
-
                 var path = decodePolylineString(steps[s]['polyline']['points']);
                 var polyline = new google.maps.Polyline({
                     path: path,
@@ -265,7 +259,6 @@
                     strokeOpacity: 1.0,
                     strokeWeight: 2
                 });
-
                 polyline.setMap(map);
             }
         }
@@ -371,7 +364,6 @@
         json = {};
         activeGrid = -1;
     }
-
     function clearPolylines() {
         for (var p = 0; p < polylines.length; p++) {
             polylines[p].setMap(null);
@@ -396,7 +388,6 @@
     const numberFormat = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap">
 </script>
@@ -431,25 +422,21 @@
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems, undefined);
-
         for (var e = 0; e < elems.legth; e++) {
             var instance = M.Modal.getInstance(elems[e]);
             instance.open();
         }
-
     });
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.autocomplete');
         var instances = M.Autocomplete.init(elems, {
             data: {
                 "Temple University": "https://pbs.twimg.com/profile_images/999732458470883328/Z7Q58gaZ_400x400.jpg",
-                "Drexel University": "https://drexel.edu/~/media/Images/identity/pageLogos/socialmedia/Drexel_social_informal_yellow_twitter.ashx?la=en",
                 "Independence Hall": 'http://states.phillipmartin.info/pennsylvania/pennsylvania_liberty_hall.png',
                 "Citizens Bank Park": 'https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Philadelphia_Phillies.svg/1200px-Philadelphia_Phillies.svg.png'
             }
         });
     });
-
 </script>
 
 </html>
