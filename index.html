@@ -155,10 +155,18 @@
         <li>
             <div class="collapsible-header"><i class="material-icons">settings</i>Tweaks</div>
             <div class="collapsible-body">
+                <p>
                 <label>
                     <input id="showUnderlyingGrids" type="checkbox" onchange="gridToggled()" checked="checked"/>
                     <span>Showing underlying grids</span>
                 </label>
+                </p>
+                <p>
+                    <label>
+                        <input id="showIndividualIncidents" type="checkbox" onchange="incidentsToggled()"/>
+                        <span>Show individual incidents</span>
+                    </label>
+                </p>
             </div>
         </li>
         <li>
@@ -237,8 +245,22 @@
     function gridToggled() {
         if(document.getElementById("showUnderlyingGrids").checked) {
             plotGrids();
+            document.getElementById("showIndividualIncidents").disabled = false;
         } else {
             clearPolygons();
+            clearMarkers();
+            document.getElementById("showIndividualIncidents").checked = false;
+            document.getElementById("showIndividualIncidents").disabled = true;
+        }
+    }
+
+    function incidentsToggled() {
+        if(document.getElementById("showIndividualIncidents").checked) {
+            for(var g = 0; g < json['grids'].length; g++) {
+                showIncidents(g);
+            }
+        } else {
+            clearMarkers();
         }
     }
     
@@ -272,6 +294,7 @@
                     strokeOpacity: 1.0,
                     strokeWeight: 2
                 });
+                polylines.push(polyline);
                 polyline.setMap(map);
             }
         }
@@ -350,10 +373,11 @@
                     lng: incident['coordinates']['lon']
                 }, 
                 map: map
-            }).addListener('click', function() {
-                  M.toast({html: incident['description'].toUpperCase()})
             });
             markers.push(marker);
+            marker.addListener('click', function() {
+                  M.toast({html: incident['description'].toUpperCase()})
+            });
         }
     }
     
