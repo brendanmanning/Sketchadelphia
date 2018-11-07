@@ -154,7 +154,12 @@
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">settings</i>Tweaks</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            <div class="collapsible-body">
+                <label>
+                    <input id="showUnderlyingGrids" type="checkbox" onchange="gridToggled()" checked="checked"/>
+                    <span>Showing underlying grids</span>
+                </label>
+            </div>
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">info_outline</i>About</div>
@@ -227,6 +232,14 @@
             M.toast({html: 'An unknown error occured.'});
             M.toast({html: 'Are you sure you have internet connection?'});
         });
+    }
+
+    function gridToggled() {
+        if(document.getElementById("showUnderlyingGrids").checked) {
+            plotGrids();
+        } else {
+            clearPolygons();
+        }
     }
     
     function presentRoute() {
@@ -315,9 +328,10 @@
         }
      
         if(activeGrid != -1) {
+            alert("Clearing from " + activeGrid);
             activeGrid = -1;
             clearMarkers();
-            showRouteStatisticsf();
+            showRouteStatistics();
             
             map.setZoom(12);
             
@@ -331,7 +345,7 @@
         var incidents = json['grids'][gridIndex]['incidents'];
         for(var i = 0; i < incidents.length; i++) {
             var incident = incidents[i]
-            new google.maps.Marker({
+            var marker = new google.maps.Marker({
                 position: {
                     lat: incident['coordinates']['lat'],
                     lng: incident['coordinates']['lon']
@@ -340,6 +354,7 @@
             }).addListener('click', function() {
                   M.toast({html: incident['description'].toUpperCase()})
             });
+            markers.push(marker);
         }
     }
     
@@ -379,10 +394,11 @@
     }
     
     function clearMarkers() {
+        alert(markers.length);
         for(var m = 0; m < markers.length; m++) {
             markers[m].setMap(null);
         }
-        markers.length = 0;
+        markers = p[l]
     }
     
     const numberFormat = (x) => {
@@ -395,7 +411,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         if(window.location.pathname == '/demo') {
-
+            document.getElementById("fromInput").value = "Temple University";
+            document.getElementById("toInput").value = "Independence Hall";
         }
     });
 
