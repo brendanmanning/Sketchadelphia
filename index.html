@@ -392,6 +392,13 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap">
 </script>
 <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if(window.location.pathname == '/demo') {
+            
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems, undefined);
