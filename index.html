@@ -328,7 +328,6 @@
         }
      
         if(activeGrid != -1) {
-            alert("Clearing from " + activeGrid);
             activeGrid = -1;
             clearMarkers();
             showRouteStatistics();
@@ -394,7 +393,6 @@
     }
     
     function clearMarkers() {
-        alert(markers.length);
         for(var m = 0; m < markers.length; m++) {
             markers[m].setMap(null);
         }
