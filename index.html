@@ -148,7 +148,8 @@
     </div>
 
     <!-- Statistics Side Bar -->
-    <ul id="statistics" class="collapsible" style="display: none">
+  
+    <ul id="statistics" class="collapsible" style="display: none; margin-right: 16px;">
         <li>
             <div id="sketchFactorStatHeader" class="collapsible-header"><center><span id="sketchFactorStat">123%</span><br><span id="sketchFactorExplanationStat">crimes reported  along this route.</span></center></div>
         </li>
@@ -481,6 +482,10 @@
     const numberFormat = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+
+    function isMobile() {
+        return( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) );
+    }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap">
 </script>
@@ -499,6 +504,9 @@
             document.getElementById("fromInput").value = "Temple University";
             document.getElementById("toInput").value = "Independence Hall";
             document.getElementById("directionsButton").disabled = false;
+        }
+        if(isMobile()) {
+            document.getElementById("statistics").style += "position: absolute; left: calc(50% - 175px)";
         }
     });
 
