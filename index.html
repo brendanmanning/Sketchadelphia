@@ -207,7 +207,7 @@
         var to = document.getElementById("toInput").value;
         
         // Now map it
-        fetch('http://10.109.205.50:4567/directions?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
+        fetch('http://178.128.147.205:4567/directions?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
             mode: 'cors',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
@@ -439,7 +439,7 @@
         var instances = M.Autocomplete.init(elems, {
             data: {
                 "Temple University": "https://pbs.twimg.com/profile_images/999732458470883328/Z7Q58gaZ_400x400.jpg",
-                "Independence Hall": 'http://states.phillipmartin.info/pennsylvania/pennsylvania_liberty_hall.png',
+                "Independence Hall": 'https://image.shutterstock.com/image-vector/liberty-bell-symbol-260nw-354893993.jpg',
                 "Citizens Bank Park": 'https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Philadelphia_Phillies.svg/1200px-Philadelphia_Phillies.svg.png',
                 "Philadelphia Zoo": "https://i.pinimg.com/236x/f3/26/fb/f326fb350cf94a471feeb39fa34eb29f--lion-clipart-vector-clipart.jpg",
                 "Philadelphia City Hall": "https://images.mentalfloss.com/sites/default/files/styles/mf_image_16x9/public/istock_67318445_small.jpg?itok=6zE9JHT_&resize=1100x1100",
