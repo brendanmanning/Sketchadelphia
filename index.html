@@ -157,7 +157,7 @@
             <div class="collapsible-body">
                 <p>
                 <label>
-                    <input id="showUnderlyingGrids" type="checkbox" onchange="gridToggled()" checked="checked"/>
+                    <input id="showUnderlyingGrids" type="checkbox" onchange="gridToggled()"/>
                     <span>Showing underlying grids</span>
                 </label>
                 </p>
@@ -245,12 +245,8 @@
     function gridToggled() {
         if(document.getElementById("showUnderlyingGrids").checked) {
             plotGrids();
-            document.getElementById("showIndividualIncidents").disabled = false;
         } else {
             clearPolygons();
-            clearMarkers();
-            document.getElementById("showIndividualIncidents").checked = false;
-            document.getElementById("showIndividualIncidents").disabled = true;
         }
     }
 
@@ -267,7 +263,6 @@
     function presentRoute() {
         plotDirections(json['googleResponse']);
         showRouteStatistics(json);
-        plotGrids(json);
     }
     
     function showRouteStatistics() {
@@ -292,7 +287,7 @@
                     path: path,
                     geodesic: true,
                     strokeOpacity: 1.0,
-                    strokeWeight: 2
+                    strokeWeight: 2,
                 });
                 polylines.push(polyline);
                 polyline.setMap(map);
@@ -300,6 +295,37 @@
         }
     }
     
+
+    function getColor(i,a) {
+        var w = 10;
+        var bw = 5;
+
+        var r = 0;
+        var g = 0;
+        var b = bw*w;
+
+        if(i>a) {
+            r = w * Math.abs(i-a);
+        }
+        if(a > g) {
+            g = w * Math.abs(a-i);
+        }
+        if(a == g) {
+            r = 255;
+            g = 255;
+        }
+
+        return "#" + rgbToHex(r,g,b);
+    }
+
+    function rgbToHex(r,g,b){
+        var bin = r << 16 | g << 8 | b;
+        return (function(h){
+            return new Array(7-h.length).join("0")+h
+        })(bin.toString(16).toUpperCase())
+    }
+
+
     function plotGrids() {
         
         var blockWidth = json['blockWidth'];
@@ -316,12 +342,14 @@
                 new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1] + blockWidth),
                 new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1])
             ];
+ //           var color = getColor(grid['incidents'].length, json['averageIncidentsPerGrid']);
+  //          alert(color);
             var polygon = new google.maps.Polygon({
                 paths: coords,
-                strokeColor: "rgb(40,40,40)",
+                strokeColor: 'black',
                 strokeOpacity: 1,
                 strokeWeight: 1,
-                fillColor: "rgb(40,40,40)",
+                fillColor: 'black',
                 fillOpacity: 0.35,
                 index: g
             });
@@ -336,11 +364,14 @@
     
     function toggleIncidents(gridIndex) {
         
+        // If nothing was selected before
         if(activeGrid == -1) {
-            activeGrid = gridIndex;
-            showIncidents(activeGrid);
-            showGridStatistics();
             
+            setHighlightedGrid(gridIndex);
+
+            activeGrid = gridIndex;
+            showGridStatistics();
+
             map.setCenter({
                 lat: json['grids'][gridIndex]['topLeft']['lat'] - (0.5 * json['blockHeight']),
                 lng: json['grids'][gridIndex]['topLeft']['lon'] + (0.5 * json['blockWidth'])
@@ -350,9 +381,13 @@
             return;
         }
      
-        if(activeGrid != -1) {
+        // If we clicked on the currently active grid...
+        // Remove the markers and stuff and zoom out
+        if(activeGrid == gridIndex) {
+            
+            setUnhighlightedGrid(gridIndex);
+
             activeGrid = -1;
-            clearMarkers();
             showRouteStatistics();
             
             map.setZoom(12);
@@ -360,6 +395,26 @@
             return;
         }
         
+        // If we clicked on a different grid
+        // Change our view to that grid
+        setUnhighlightedGrid(activeGrid);
+        activeGrid = -1;
+        toggleIncidents(gridIndex);
+
+    }
+
+    function setHighlightedGrid(gridIndex) {
+        polygons[gridIndex].setOptions({
+            fillColor: 'yellow',
+            fillOpacity: 0.6
+        })
+    }
+
+    function setUnhighlightedGrid(gridIndex) {
+        polygons[gridIndex].setOptions({
+            fillColor: 'black',
+            fillOpacity: 0.35
+        })
     }
     
     function showIncidents(gridIndex) {
