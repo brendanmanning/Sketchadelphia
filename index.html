@@ -409,8 +409,16 @@
 </script>
 <script>
 
+    function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
     document.addEventListener('DOMContentLoaded', function() {
-        if(window.location.pathname == '/demo') {
+        if(getUrlVars()['demo'] != undefined) {
             document.getElementById("fromInput").value = "Temple University";
             document.getElementById("toInput").value = "Independence Hall";
         }
