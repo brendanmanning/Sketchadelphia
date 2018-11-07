@@ -149,7 +149,7 @@
 
     <!-- Statistics Side Bar -->
   
-    <ul id="statistics" class="collapsible" style="display: none; margin-right: 16px;">
+    <ul id="statistics" class="collapsible" style="display: none; ">
         <li>
             <div id="sketchFactorStatHeader" class="collapsible-header"><center><span id="sketchFactorStat">123%</span><br><span id="sketchFactorExplanationStat">crimes reported  along this route.</span></center></div>
         </li>
@@ -506,7 +506,9 @@
             document.getElementById("directionsButton").disabled = false;
         }
         if(isMobile()) {
-            document.getElementById("statistics").style += "position: absolute; left: calc(50% - 175px)";
+            document.getElementById("statistics").style += " width: 150px; position: absolute; left: calc(50% - 150px)";
+        } else {
+            document.getElementById("statistics").style += " margin-right: 16px;";
         }
     });
 
