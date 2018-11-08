@@ -4,6 +4,7 @@
 > Research on the feasibility of safety-aware navigation apps.
 ## Methodology
 We start with the Crime Incidents Dataset from [OpenDataPhilly](https://www.opendataphilly.org/dataset/crime-incidents). Every reported incident of crime occupies a row in the table looking something like
+
 | ID | Time | Description | Latitude | Longitude |
 | --- | --- | --- | --- | --- |
 | 1 | 2018-04-08 19:09:00 | DRIVING UNDER THE INFLUENCE | 39.99825344 | -75.12062171 |
