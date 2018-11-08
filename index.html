@@ -52,7 +52,6 @@
 <head>
     <title>Sketchadelphia</title>
 
-
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -149,7 +148,7 @@
 
     <!-- Statistics Side Bar -->
   
-    <ul id="statistics" class="collapsible" style="display: none; ">
+    <ul id="statistics" class="collapsible" style="display: none;">
         <li>
             <div id="sketchFactorStatHeader" class="collapsible-header"><center><span id="sketchFactorStat">123%</span><br><span id="sketchFactorExplanationStat">crimes reported  along this route.</span></center></div>
         </li>
@@ -510,6 +509,7 @@
         } else {
             document.getElementById("statistics").style += " margin-right: 16px;";
         }
+        document.getElementById("statistics").style.display = 'none';
     });
 
     document.addEventListener('DOMContentLoaded', function() {
