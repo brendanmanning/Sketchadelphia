@@ -3,7 +3,7 @@
 
 > Research on the feasibility of safety-aware navigation apps.
 ## Methodology
-We start with the Crime Incidents Dataset from [OpenDataPhilly](https://www.opendataphilly.org/dataset/crime-incidents). Every reported incident of crime occupies a row in the table looking something like
+1. We start with the Crime Incidents Dataset from [OpenDataPhilly](https://www.opendataphilly.org/dataset/crime-incidents). Every reported incident of crime occupies a row in the table looking something like
 
 | ID | Time | Description | Latitude | Longitude |
 | --- | --- | --- | --- | --- |
