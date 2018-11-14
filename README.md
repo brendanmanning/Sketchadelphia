@@ -1,5 +1,6 @@
 # Sketchadelphia
 > How sketchy is your next drive through Philadelphia?
+[![CodeFactor](https://www.codefactor.io/repository/github/brendanmanning/sketchadelphia/badge)](https://www.codefactor.io/repository/github/brendanmanning/sketchadelphia)
 
 > Research on the feasibility of safety-aware navigation apps.
 ## Methodology
