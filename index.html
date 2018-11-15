@@ -362,7 +362,7 @@
             var color = getColor(grid['incidents'].length, json['averageIncidentsPerGrid']);
             var polygon = new google.maps.Polygon({
                 paths: coords,
-                strokeColor: 'black',
+                strokeColor: color,
                 strokeOpacity: 1,
                 strokeWeight: 1,
                 fillColor: color,
