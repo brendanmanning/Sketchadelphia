@@ -183,6 +183,8 @@
 </body>
 <script>
     
+    var developerMode = false;
+
     var json = {};
     
     var polylines = [];
@@ -319,9 +321,13 @@
             return rgbToHex(yellow);
         }
 
-        if( i >= a ) {
-
+        if( i > a ) {
+            return rgbToHex(red);
         } 
+
+        if( i < a ) {
+            return rgbToHex(green);
+        }
     }
 
     function rgbToHex(o){
@@ -353,18 +359,18 @@
                 new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1] + blockWidth),
                 new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1])
             ];
- //           var color = getColor(grid['incidents'].length, json['averageIncidentsPerGrid']);
-  //          alert(color);
+            var color = getColor(grid['incidents'].length, json['averageIncidentsPerGrid']);
             var polygon = new google.maps.Polygon({
                 paths: coords,
                 strokeColor: 'black',
                 strokeOpacity: 1,
                 strokeWeight: 1,
-                fillColor: 'black',
+                fillColor: color,
                 fillOpacity: 0.35,
                 index: g
             });
             google.maps.event.addListener(polygon, 'click', function (event) {
+                
                 toggleIncidents(this.index)
             });
             polygons.push(polygon);
