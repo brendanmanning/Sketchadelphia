@@ -221,7 +221,7 @@
         var to = document.getElementById("toInput").value;
         
         // Now map it
-        fetch('http://178.128.147.205:4567/directions?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
+        fetch('http://api.sketchadelphia.com/directions?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
             mode: 'cors',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
@@ -298,28 +298,38 @@
     
 
     function getColor(i,a) {
-        var w = 10;
-        var bw = 5;
+        
+        var red = {
+            r: 255,
+            g: 0,
+            b: 0
+        };
+        var yellow = {
+            r: 255,
+            g: 242,
+            b: 0
+        };
+        var green = {
+            r: 30,
+            g: 150,
+            b: 0
+        };
 
-        var r = 0;
-        var g = 0;
-        var b = bw*w;
-
-        if(i>a) {
-            r = w * Math.abs(i-a);
-        }
-        if(a > g) {
-            g = w * Math.abs(a-i);
-        }
-        if(a == g) {
-            r = 255;
-            g = 255;
+        if( i == a) {
+            return rgbToHex(yellow);
         }
 
-        return "#" + rgbToHex(r,g,b);
+        if( i >= a ) {
+
+        } 
     }
 
-    function rgbToHex(r,g,b){
+    function rgbToHex(o){
+        
+        var r = o.r;
+        var g = o.g;
+        var b = o.b;
+
         var bin = r << 16 | g << 8 | b;
         return (function(h){
             return new Array(7-h.length).join("0")+h
