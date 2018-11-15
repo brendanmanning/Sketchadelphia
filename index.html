@@ -285,6 +285,7 @@
         for (var l = 0; l < legs.length; l++) {
             var steps = legs[l]['steps'];
             for (var s = 0; s < steps.length; s++) {
+                var color = getColor(grids[whichGrid(steps[s]['polyline']['points'][0])]['incidents'].length, json['averageIncidentsPerGrid']);
                 var path = decodePolylineString(steps[s]['polyline']['points']);
                 var polyline = new google.maps.Polyline({
                     path: path,
@@ -298,6 +299,23 @@
         }
     }
     
+    function whichGrid(coordinates) {
+        for(var g = 0; g < grids.length; g++) {
+
+            var topLeftX = grids[g]['topLeft'][0];
+            var topLeftY = grids[g]['topLeft'][1];
+            var bottomRightX = grids[g]['topLeft'][0] + json['blockWidth'];
+            var bottomRightY = grids[g]['topLeft'][1] - json['blockHeight'];
+
+            if(coordinates[0] >= topLeftX && coordinates[0] < bottomRightX) {
+                if(coordinates[1] <= topLeftY && coordinates[1] > bottomRightY) {
+                    return g;
+                }
+            }
+        }
+        
+        return -1;
+    }
 
     function getColor(i,a) {
         
@@ -326,7 +344,7 @@
         } 
 
         if( i < a ) {
-            return "rgb(30,30,200)";
+            return "green";
         }
     }
 
