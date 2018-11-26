@@ -482,10 +482,7 @@
                 new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1] + blockWidth),
                 new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1])
             ];
-            var color = getColor(grid['incidents'].length, json['averageIncidentsPerGrid']);
-            
-            alert(JSON.stringify(getPercentile(grid['incidents'].length, json['percentiles'])));
-            
+            var color = getColorForPercentile(getPercentileIndex(grid['incidents'].length, json['percentiles']));
             var polygon = new google.maps.Polygon({
                 paths: coords,
                 strokeColor: color,
@@ -505,13 +502,18 @@
         
     }
     
-    function getPercentile(i, percentiles) {
+    function getPercentileIndex(a, percentiles) {
         for(var p = 0; p < percentiles.length; p++) {
-            if(i <= percentiles[p]['upperBound']) {
-                return percentiles[p];   
+            if(a <= percentiles[p]['upperBound']) {
+                return p;   
             }
         }
-        return percentiles[percentiles.length - 1];
+        return percentiles.length - 1;
+    }
+    
+    function getColorForPercentile(percentileIndex) {
+        var colors = ['#ff6666', '#ff8c66', '#ffb366', '#ffd966', '#ffff66', '#d9ff66', '#b3ff66', '#8cff66', '#66ff66', '#66ff8c'];
+        return colors[percentileIndex];
     }
     
     function toggleIncidents(gridIndex) {
