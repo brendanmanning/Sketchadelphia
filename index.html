@@ -332,6 +332,7 @@
         var directionsButton = document.getElementById("directionsButton");
         directionsButton.disabled = from.length == 0 || to.length == 0;
     }
+
     function routePressed() {
 
         // First clear everything we already did
@@ -398,6 +399,7 @@
         document.getElementById("sketchFactorStat").innerHTML = numberFormat(json['grids'][activeGrid]['incidents'].length);
         document.getElementById("sketchFactorExplanationStat").innerHTML = "crimes reported in this segment of your trip in 2018.";
     }
+    
     function plotDirections() {
         var route = json['googleResponse']['routes'][0];
         var legs = route['legs'];
@@ -480,7 +482,6 @@
             return new Array(7 - h.length).join("0") + h
         })(bin.toString(16).toUpperCase())
     }
-
 
     function plotGrids() {
 
@@ -627,6 +628,7 @@
         json = {};
         activeGrid = -1;
     }
+    
     function clearPolylines() {
         for (var p = 0; p < polylines.length; p++) {
             polylines[p].setMap(null);
@@ -655,6 +657,7 @@
     function isMobile() {
         return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
     }
+
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap">
 </script>
@@ -692,6 +695,7 @@
         }
 
     });
+    
     document.getElementById("directionsButton").addEventListener("click", function () {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems, undefined);
@@ -701,14 +705,17 @@
             instance.close();
         }
     });
+    
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.fixed-action-btn');
         var instances = M.FloatingActionButton.init(elems, undefined);
     });
+    
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.collapsible');
         var instances = M.Collapsible.init(elems, undefined);
     });
+    
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems, undefined);
@@ -717,7 +724,8 @@
             instance.open();
         }
     });
-    document.addEventListener('DOMContentLoaded', function () {
+   
+   document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.autocomplete');
         var instances = M.Autocomplete.init(elems, {
             data: {
