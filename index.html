@@ -513,6 +513,14 @@
                 M.toast({html: '<strong>' + json['grids'][this.index]['incidents'].length + '</strong> crimes in this grid.'})
 
             });
+
+
+            // https://icons8.com/icon/17907/gun
+            // https://icons8.com/icon/52810/pill
+            // https://img.icons8.com/ultraviolet/2x/car-theft.png
+            // https://icons8.com/icon/51106/spray
+
+
             polygons.push(polygon);
             polygon.setMap(map);
         }
@@ -575,6 +583,49 @@
         setUnhighlightedGrid(activeGrid);
         activeGrid = -1;
         toggleIncidents(gridIndex);
+
+    }
+
+    function getIconForIncident(incident) {
+        var map = {
+            "All Other Offenses": "ASTERISK",
+            "Other Assaults": "ASTERISK",
+            "Thefts": "CROWBAR",
+            "Vandalism/Criminal Mischief": "SPRAYPAINT",
+            "Theft from Vehicle": "CARTHEFT",
+            "Narcotic / Drug Law Violations": "PILL",
+            "Fraud": "MONEY",
+            "Recovered Stolen Motor Vehicle": "CARTHEFT",
+            "Burglary Residential": "CROWBAR",
+            "Aggravated Assault No Firearm": "SKIMASK",
+            "DRIVING UNDER THE INFLUENCE": "BOOZE",
+            "Robbery No Firearm": "CROWBAR",
+            "Motor Vehicle Theft": "CARTHEFT",
+            "Robbery Firearm": "GUN",
+            "Disorderly Conduct": "ASTERISK",
+            "Aggravated Assault Firearm": "SKIMASK",
+            "Burglary Non-Residential": "SKIMASK",
+            "Weapon Violations": "GUN",
+            "Other Sex Offenses (Not Commercialized)": "XXX",
+            "Prostitution and Commercialized Vice": "XXX",
+            "Rape": "XXX",
+            "Vagrancy/Loitering": "ASTERISK",
+            "Arson": "FIRE",
+            "Liquor Law Violations": "BOOZE",
+            "Embezzlement": "MONEY",
+            "Forgery and Counterfeiting": "MONEY",
+            "Public Drunkenness": "BOOZE",
+            "Homicide - Criminal": "SKULL",
+            "Offenses Against Family and Children": "FAMILY",
+            " ": "ASTERISK",
+            "Gambling Violations": "DICE",
+            "Receiving Stolen Property": "CROWBAR",
+            "Homicide - Criminal": "SKULL",
+            "Homicide - Justifiable": "SKULL",
+            "Homicide - Gross Negligence": "SKULL"
+        }
+
+        return map[incident];
 
     }
 
