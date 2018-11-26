@@ -125,7 +125,8 @@
             </div>
             <div class="col s12">
                 <div class="input-field col s12">
-                    <button id="directionsButton" onclick="routePressed()" class="btn waves-effect waves-light" type="submit" name="action" disabled>Go
+                    <button id="directionsButton" onclick="routePressed()" class="btn waves-effect waves-light" type="submit"
+                        name="action" disabled>Go
                         <i class="material-icons right">directions</i>
                     </button>
                 </div>
@@ -148,23 +149,26 @@
     </div>
 
     <!-- Statistics Side Bar -->
-  
+
     <ul id="statistics" class="collapsible" style="display: none;">
         <li>
-            <div id="sketchFactorStatHeader" class="collapsible-header"><center><span id="sketchFactorStat">123%</span><br><span id="sketchFactorExplanationStat">crimes reported  along this route.</span></center></div>
+            <div id="sketchFactorStatHeader" class="collapsible-header">
+                <center><span id="sketchFactorStat">123%</span><br><span id="sketchFactorExplanationStat">crimes
+                        reported along this route.</span></center>
+            </div>
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">settings</i>Tweaks</div>
             <div class="collapsible-body">
                 <p>
-                <label>
-                    <input id="showUnderlyingGrids" type="checkbox" onchange="gridToggled()"/>
-                    <span>Showing underlying grids</span>
-                </label>
+                    <label>
+                        <input id="showUnderlyingGrids" type="checkbox" onchange="gridToggled()" />
+                        <span>Showing underlying grids</span>
+                    </label>
                 </p>
                 <p>
                     <label>
-                        <input id="showIndividualIncidents" type="checkbox" onchange="incidentsToggled()"/>
+                        <input id="showIndividualIncidents" type="checkbox" onchange="incidentsToggled()" />
                         <span>Show individual incidents</span>
                     </label>
                 </p>
@@ -172,7 +176,19 @@
         </li>
         <li>
             <div class="collapsible-header"><i class="material-icons">info_outline</i>About</div>
-            <div class="collapsible-body"><div style="overflow: auto; display: block"><p>Hi! I'm <a href="https://github.com/brendanmanning">Brendan Manning</a>, a Computer Science & Physics major at Temple University.</p><p>I created Sketchadelphia after a sketchy Uber ride through North Philadelphia. This interactive demonstration is meant to show that companies like Uber and Lyft should factor rider safety into their algorithms.</p><p>If you are from a tech company looking to incorportate Sketchadelphia features into your app, please <a href="mailto:tuj97064@temple.edu">send me an email</a></p><p>If you are a recruiter, lets <a href="https://www.linkedin.com/in/brendan-m-544823a2/">Connect on Linkedin!</a></p></div></div>
+            <div class="collapsible-body">
+                <div style="overflow: auto; display: block">
+                    <p>Hi! I'm <a href="https://github.com/brendanmanning">Brendan Manning</a>, a Computer Science &
+                        Physics major at Temple University.</p>
+                    <p>I created Sketchadelphia after a sketchy Uber ride through North Philadelphia. This interactive
+                        demonstration is meant to show that companies like Uber and Lyft should factor rider safety
+                        into their algorithms.</p>
+                    <p>If you are from a tech company looking to incorportate Sketchadelphia features into your app,
+                        please <a href="mailto:tuj97064@temple.edu">send me an email</a></p>
+                    <p>If you are a recruiter, lets <a href="https://www.linkedin.com/in/brendan-m-544823a2/">Connect
+                            on Linkedin!</a></p>
+                </div>
+            </div>
         </li>
     </ul>
 
@@ -182,18 +198,18 @@
 
 </body>
 <script>
-    
+
     var developerMode = false;
 
     var json = {};
-    
+
     var polylines = [];
     var polygons = [];
     var markers = [];
-    
-    
+
+
     activeGrid = -1;
-    
+
     function initMap() {
         var myLatLng = {
             lat: 39.9816,
@@ -204,112 +220,112 @@
             center: myLatLng,
             disableDefaultUI: true,
             styles: [
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.country",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "off"
-            },
-            {
-                "color": "#fc6e6e"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.province",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "off"
-            },
-            {
-                "hue": "#008aff"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#f2f2f2"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 45
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#bee0ee"
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    }
-]
+                {
+                    "featureType": "administrative",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#444444"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.country",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        },
+                        {
+                            "color": "#fc6e6e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.province",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        },
+                        {
+                            "hue": "#008aff"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "landscape",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "color": "#f2f2f2"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "saturation": -100
+                        },
+                        {
+                            "lightness": 45
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "color": "#bee0ee"
+                        },
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                }
+            ]
         });
     }
-    
+
     function inputUpdated() {
         var from = document.getElementById("fromInput").value;
         var to = document.getElementById("toInput").value;
@@ -317,39 +333,39 @@
         directionsButton.disabled = from.length == 0 || to.length == 0;
     }
     function routePressed() {
-        
+
         // First clear everything we already did
         reset();
-        
+
         // Now get the to and from
         var from = document.getElementById("fromInput").value;
         var to = document.getElementById("toInput").value;
-        
+
         // Now map it
         fetch('http://api.sketchadelphia.com/directions?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
             mode: 'cors',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                'Access-Control-Allow-Origin':'*'
+                'Access-Control-Allow-Origin': '*'
             }
-        }).then(function(response) {
+        }).then(function (response) {
             return response.json();
-        }).then(function(myjson) {
+        }).then(function (myjson) {
             json = myjson;
-            
-            if(json['success']) {
+
+            if (json['success']) {
                 presentRoute();
             } else {
-                M.toast({html: json['message']})
+                M.toast({ html: json['message'] })
             }
-        }).catch(function() {
-            M.toast({html: 'An unknown error occured.'});
-            M.toast({html: 'Are you sure you have internet connection?'});
+        }).catch(function () {
+            M.toast({ html: 'An unknown error occured.' });
+            M.toast({ html: 'Are you sure you have internet connection?' });
         });
     }
 
     function gridToggled() {
-        if(document.getElementById("showUnderlyingGrids").checked) {
+        if (document.getElementById("showUnderlyingGrids").checked) {
             plotGrids();
         } else {
             clearPolygons();
@@ -357,26 +373,26 @@
     }
 
     function incidentsToggled() {
-        if(document.getElementById("showIndividualIncidents").checked) {
-            for(var g = 0; g < json['grids'].length; g++) {
+        if (document.getElementById("showIndividualIncidents").checked) {
+            for (var g = 0; g < json['grids'].length; g++) {
                 showIncidents(g);
             }
         } else {
             clearMarkers();
         }
     }
-    
+
     function presentRoute() {
         plotDirections(json['googleResponse']);
         showRouteStatistics(json);
     }
-    
+
     function showRouteStatistics() {
         document.getElementById("statistics").style.display = "block";
         document.getElementById("sketchFactorStat").innerHTML = numberFormat(json['reportedIncidents']);
         document.getElementById("sketchFactorExplanationStat").innerHTML = "crimes reported along this route in 2018.";
     }
-    
+
     function showGridStatistics() {
         document.getElementById("statistics").style.display = "block";
         document.getElementById("sketchFactorStat").innerHTML = numberFormat(json['grids'][activeGrid]['incidents'].length);
@@ -403,27 +419,27 @@
             }
         }
     }
-        
+
     function whichGrid(coordinates) {
-        for(var g = 0; g < grids.length; g++) {
+        for (var g = 0; g < grids.length; g++) {
 
             var topLeftX = grids[g]['topLeft'][0];
             var topLeftY = grids[g]['topLeft'][1];
             var bottomRightX = grids[g]['topLeft'][0] + json['blockWidth'];
             var bottomRightY = grids[g]['topLeft'][1] - json['blockHeight'];
 
-            if(coordinates[0] >= topLeftX && coordinates[0] < bottomRightX) {
-                if(coordinates[1] <= topLeftY && coordinates[1] > bottomRightY) {
+            if (coordinates[0] >= topLeftX && coordinates[0] < bottomRightX) {
+                if (coordinates[1] <= topLeftY && coordinates[1] > bottomRightY) {
                     return g;
                 }
             }
         }
-        
+
         return -1;
     }
 
-    function getColor(i,a) {
-        
+    function getColor(i, a) {
+
         var red = {
             r: 255,
             g: 0,
@@ -440,37 +456,37 @@
             b: 0
         };
 
-        if( i == a) {
+        if (i == a) {
             return "yellow";
         }
 
-        if( i > a ) {
+        if (i > a) {
             return "red";
-        } 
+        }
 
-        if( i < a ) {
+        if (i < a) {
             return "green";
         }
     }
 
-    function rgbToHex(o){
-        
+    function rgbToHex(o) {
+
         var r = o.r;
         var g = o.g;
         var b = o.b;
 
         var bin = r << 16 | g << 8 | b;
-        return "#" + (function(h){
-            return new Array(7-h.length).join("0")+h
+        return "#" + (function (h) {
+            return new Array(7 - h.length).join("0") + h
         })(bin.toString(16).toUpperCase())
     }
 
 
     function plotGrids() {
-        
+
         var blockWidth = json['blockWidth'];
         var blockHeight = json['blockHeight'];
-        for(var g = 0; g < json['grids'].length; g++) {
+        for (var g = 0; g < json['grids'].length; g++) {
             var grid = json['grids'][g];
             var topLeft = [
                 grid['topLeft']['lat'],
@@ -493,34 +509,34 @@
                 index: g
             });
             google.maps.event.addListener(polygon, 'click', function (event) {
-                
+
                 toggleIncidents(this.index)
             });
             polygons.push(polygon);
             polygon.setMap(map);
         }
-        
+
     }
-    
+
     function getPercentileIndex(a, percentiles) {
-        for(var p = 0; p < percentiles.length; p++) {
-            if(a <= percentiles[p]['upperBound']) {
-                return p;   
+        for (var p = 0; p < percentiles.length; p++) {
+            if (a <= percentiles[p]['upperBound']) {
+                return p;
             }
         }
         return percentiles.length - 1;
     }
-    
+
     function getColorForPercentile(percentileIndex) {
-        var colors = [ '#66ff66', '#66ff66',  '#8cff66', '#b3ff66', '#d9ff66', '#ffff66', '#ffd966', '#ffb366', '#ff8c66', '#ff6666' ];
+        var colors = ['#66ff66', '#66ff66', '#8cff66', '#b3ff66', '#d9ff66', '#ffff66', '#ffd966', '#ffb366', '#ff8c66', '#ff6666'];
         return colors[percentileIndex];
     }
-    
+
     function toggleIncidents(gridIndex) {
-        
+
         // If nothing was selected before
-        if(activeGrid == -1) {
-            
+        if (activeGrid == -1) {
+
             setHighlightedGrid(gridIndex);
 
             activeGrid = gridIndex;
@@ -531,24 +547,24 @@
                 lng: json['grids'][gridIndex]['topLeft']['lon'] + (0.5 * json['blockWidth'])
             });
             map.setZoom(17);
-            
+
             return;
         }
-     
+
         // If we clicked on the currently active grid...
         // Remove the markers and stuff and zoom out
-        if(activeGrid == gridIndex) {
-            
+        if (activeGrid == gridIndex) {
+
             setUnhighlightedGrid(gridIndex);
 
             activeGrid = -1;
             showRouteStatistics();
-            
+
             map.setZoom(12);
-            
+
             return;
         }
-        
+
         // If we clicked on a different grid
         // Change our view to that grid
         setUnhighlightedGrid(activeGrid);
@@ -570,26 +586,26 @@
             fillOpacity: 0.35
         })
     }
-    
+
     function showIncidents(gridIndex) {
-        
+
         var incidents = json['grids'][gridIndex]['incidents'];
-        for(var i = 0; i < incidents.length; i++) {
+        for (var i = 0; i < incidents.length; i++) {
             var incident = incidents[i]
             var marker = new google.maps.Marker({
                 position: {
                     lat: incident['coordinates']['lat'],
                     lng: incident['coordinates']['lon']
-                }, 
+                },
                 map: map
             });
             markers.push(marker);
-            marker.addListener('click', function() {
-                  M.toast({html: incident['description'].toUpperCase()})
+            marker.addListener('click', function () {
+                M.toast({ html: incident['description'].toUpperCase() })
             });
         }
     }
-    
+
     function decodePolylineString(str) {
         var polygonsAsTwoDArray = polyline.decode(str);
         var polygonsAsArrayOfObjects = [];
@@ -602,12 +618,12 @@
         console.log(JSON.stringify(polygonsAsArrayOfObjects));
         return polygonsAsArrayOfObjects;
     }
-    
+
     function reset() {
         clearPolylines();
         clearPolygons();
         clearMarkers();
-        
+
         json = {};
         activeGrid = -1;
     }
@@ -617,27 +633,27 @@
         }
         polylines.length = 0;
     }
-    
+
     function clearPolygons() {
         for (var p = 0; p < polygons.length; p++) {
             polygons[p].setMap(null);
         }
         polygons.length = 0;
     }
-    
+
     function clearMarkers() {
-        for(var m = 0; m < markers.length; m++) {
+        for (var m = 0; m < markers.length; m++) {
             markers[m].setMap(null);
         }
         markers = [];
     }
-    
+
     const numberFormat = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     function isMobile() {
-        return( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) );
+        return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap">
@@ -645,20 +661,20 @@
 <script>
 
     function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        if(getUrlVars()['demo'] != undefined) {
+    document.addEventListener('DOMContentLoaded', function () {
+        if (getUrlVars()['demo'] != undefined) {
             document.getElementById("fromInput").value = "Temple University";
             document.getElementById("toInput").value = "Independence Hall";
             document.getElementById("directionsButton").disabled = false;
         }
-        if(isMobile()) {
+        if (isMobile()) {
             document.getElementById("statistics").style += " width: 150px; position: absolute; left: calc(50% - 150px)";
         } else {
             document.getElementById("statistics").style += " margin-right: 16px;";
@@ -666,34 +682,34 @@
         document.getElementById("statistics").style.display = 'none';
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems, undefined);
-        
+
         for (var e = 0; e < elems.length; e++) {
             var instance = M.Sidenav.getInstance(elems[e]);
             instance.open();
         }
-        
+
     });
-    document.getElementById("directionsButton").addEventListener("click", function() {
+    document.getElementById("directionsButton").addEventListener("click", function () {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems, undefined);
-        
+
         for (var e = 0; e < elems.length; e++) {
             var instance = M.Sidenav.getInstance(elems[e]);
             instance.close();
         }
     });
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.fixed-action-btn');
         var instances = M.FloatingActionButton.init(elems, undefined);
     });
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.collapsible');
         var instances = M.Collapsible.init(elems, undefined);
     });
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems, undefined);
         for (var e = 0; e < elems.legth; e++) {
@@ -701,7 +717,7 @@
             instance.open();
         }
     });
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.autocomplete');
         var instances = M.Autocomplete.init(elems, {
             data: {
