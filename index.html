@@ -536,7 +536,7 @@
     function getAveragePercentileForRoute() {
         var t = 0;
         for(var i = 0; i < json['percentiles'].length; i++) {
-            t += json['percentiles'][p]['percentile'];
+            t += json['percentiles'][i]['percentile'];
         }
         return t / json['percentiles'].length;
     }
