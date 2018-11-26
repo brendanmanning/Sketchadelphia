@@ -403,7 +403,7 @@
             }
         }
     }
-    
+        
     function whichGrid(coordinates) {
         for(var g = 0; g < grids.length; g++) {
 
@@ -483,6 +483,9 @@
                 new google.maps.LatLng(topLeft[0] - blockHeight, topLeft[1])
             ];
             var color = getColor(grid['incidents'].length, json['averageIncidentsPerGrid']);
+            
+            alert(getPercentile(grid['incidents'].length, json['percentiles']));
+            
             var polygon = new google.maps.Polygon({
                 paths: coords,
                 strokeColor: color,
@@ -500,6 +503,15 @@
             polygon.setMap(map);
         }
         
+    }
+    
+    function getPercentile(var i, var percentiles) {
+        for(var p = 0; p < percentiles.length; p++) {
+            if(i <= percentiles[p]['upperBound']) {
+                return percentiles[p];   
+            }
+        }
+        return percentiles[percentiles.length - 1];
     }
     
     function toggleIncidents(gridIndex) {
