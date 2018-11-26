@@ -510,8 +510,8 @@
                 index: g
             });
             google.maps.event.addListener(polygon, 'click', function (event) {
+                M.toast({html: '<strong>' + json['grids'][this.index]['incidents'].length + '</strong>crimes in this grid.'})
 
-                toggleIncidents(this.index)
             });
             polygons.push(polygon);
             polygon.setMap(map);
