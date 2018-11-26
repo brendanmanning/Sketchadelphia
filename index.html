@@ -534,7 +534,7 @@
     }
 
     function getAveragePercentileForRoute() {
-        return json['percentiles'][(json['reportedIncidents']/json['grids'].length)]['percentile'];
+        return json['percentiles'][getPercentileIndex(json['reportedIncidents']/json['grids'].length, json['percentiles'])]['percentile'];
     }
 
     function toggleIncidents(gridIndex) {
