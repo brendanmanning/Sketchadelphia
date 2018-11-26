@@ -484,7 +484,7 @@
             ];
             var color = getColor(grid['incidents'].length, json['averageIncidentsPerGrid']);
             
-            alert(getPercentile(grid['incidents'].length, json['percentiles']));
+            alert(JSON.stringify(getPercentile(grid['incidents'].length, json['percentiles'])));
             
             var polygon = new google.maps.Polygon({
                 paths: coords,
