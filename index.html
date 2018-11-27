@@ -657,7 +657,10 @@
                     lng: incident['coordinates']['lon']
                 },
                 map: map,
-                icon: icon
+                icon: {
+                    url: icon,
+                    scaledSize: new google.maps.Size(50, 50)
+                }
             });
             markers.push(marker);
             marker.addListener('click', function () {
