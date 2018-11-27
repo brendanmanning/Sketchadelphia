@@ -586,9 +586,9 @@
 
     }
 
-    function getIconForIncident(incident) {
+    function getIconForIncident(incidentDescription) {
 
-        incident = incident.toUpperCase().replace(/ /g,'');
+        incidentDescription = incidentDescription.toUpperCase().replace(/ /g,'');
 
         var map = {
             "ALLOTHEROFFENSES": "ASTERISK",
@@ -628,7 +628,7 @@
             "HOMICIDE-GROSS NEGLIGENCE": "SKULL"
         }
 
-        return map[incident];
+        return map[incidentDescription];
 
     }
 
@@ -647,16 +647,17 @@
     }
 
     function showIncidents(gridIndex) {
-
         var incidents = json['grids'][gridIndex]['incidents'];
         for (var i = 0; i < incidents.length; i++) {
-            var incident = incidents[i]
+            var incident = incidents[i];
+            var icon = getIconForIncident(incident['description']);
             var marker = new google.maps.Marker({
                 position: {
                     lat: incident['coordinates']['lat'],
                     lng: incident['coordinates']['lon']
                 },
-                map: map
+                map: map,
+                icon: icon
             });
             markers.push(marker);
             marker.addListener('click', function () {
