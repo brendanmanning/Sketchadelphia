@@ -212,6 +212,7 @@
     activeGrid = -1;
 
     function initMap() {
+        
         var myLatLng = {
             lat: 39.9816,
             lng: -75.1494
@@ -325,6 +326,18 @@
                 }
             ]
         });
+
+
+        var autocompleteFrom = new google.maps.places.Autocomplete(document.getElementById("fromInput"));
+        var autocompleteTo = new google.maps.places.Autocomplete(document.getElementById("toInput"));
+
+        autocompleteFrom.bindTo('bounds', map);
+        autocompleteTo.bindTo('bounds', map);
+
+        autocompleteFrom.setFields(['address_components', 'icon', 'name']);
+        autocompleteTo.setFields(['address_components', 'icon', 'name']);
+
+
     }
 
     function inputUpdated() {
@@ -754,7 +767,7 @@
     }
 
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap&libraries=places">
 </script>
 <script>
 
@@ -821,7 +834,7 @@
     });
    
    document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('.autocomplete');
+        /*var elems = document.querySelectorAll('.autocomplete');
         var instances = M.Autocomplete.init(elems, {
             data: {
                 "Temple University": "https://pbs.twimg.com/profile_images/999732458470883328/Z7Q58gaZ_400x400.jpg",
@@ -831,7 +844,7 @@
                 "Philadelphia City Hall": "https://images.mentalfloss.com/sites/default/files/styles/mf_image_16x9/public/istock_67318445_small.jpg?itok=6zE9JHT_&resize=1100x1100",
                 "Thomas Jefferson University": "https://www.underconsideration.com/brandnew/archives/jefferson_university_2017_monogram.png"
             }
-        });
+        });*/
     });
 </script>
 
