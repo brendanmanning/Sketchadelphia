@@ -586,6 +586,38 @@
 
     }
 
+    function getCategoriesForIncident(incidentDescription) {
+
+        incidentDescription = incidentDescription.toUpperCase().replace(/ /g,'');
+
+        var categories = [];
+
+        // Basic Categories
+        var murder = ["HOMICIDE-CRIMINAL", "HOMICIDE-JUSTIFIABLE", "HOMICIDE-GROSS NEGLIGENCE"];
+        var theft = ["THEFTS", "THEFTFROMVEHICLE", "RECOVEREDSTOLENMOTORVEHICLE", "BURGLARYRESIDENTIAL", "ROBBERYNOFIREARM", "MOTORVEHICLETHEFT", "ROBBERYFIREARM", "BURGLARYNON-RESIDENTIAL", "RECEIVINGSTOLENPROPERTY" ];
+        var money = ["FRAUD", "FORGERYANDCOUNTERFEITING" ];
+        var vice = ["DRIVINGUNDERTHEINFLUENCE", "OTHERSEXOFFENSES(NOTCOMMERCIALIZED)", "PROSTITUTIONANDCOMMERCIALIZEDVICE", "RAPE", "LIQUORLAWVIOLATIONS", "PUBLICDRUNKENNESS", "GAMBLINGVIOLATIONS" ];
+        var drug = [ "NARCOTIC/DRUGLAWVIOLATIONS" ];
+        var domestic = [ "OFFENSESAGAINSTFAMILYANDCHILDREN" ];
+
+        if(murder.includes(incidentDescription)) {
+            categories.push("Murder");
+        } else if(theft.includes(incidentDescription)) {
+            categories.push("Theft");
+        } else if(money.includes(incidentDescription)) {
+            categories.push("Money-Related");
+        } else if(vice.includes(incidentDescription)) {
+            categories.push("Vice (Alcohol, Gambling, Sex)");
+        } else if(drug.includes(incidentDescription)) {
+            categories.push("Narcotics");
+        } else if(murder.includes(incidentDescription)) {
+            categories.push("Domestic/Family");
+        }
+
+        return categories;
+        
+    }
+
     function getIconForIncident(incidentDescription) {
 
         incidentDescription = incidentDescription.toUpperCase().replace(/ /g,'');
@@ -618,7 +650,6 @@
             "EMBEZZLEMENT": "MONEY",
             "FORGERYANDCOUNTERFEITING": "MONEY",
             "PUBLICDRUNKENNESS": "BOOZE",
-            "HOMICIDE-CRIMINAL": "SKULL",
             "OFFENSESAGAINSTFAMILYANDCHILDREN": "FAMILY",
             "": "ASTERISK",
             "GAMBLINGVIOLATIONS": "DICE",
