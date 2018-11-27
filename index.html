@@ -594,7 +594,7 @@
             "ALLOTHEROFFENSES": "ASTERISK",
             "OTHERASSAULTS": "ASTERISK",
             "THEFTS": "CROWBAR",
-            "VANDALISM/CRIMINAL MISCHIEF": "SPRAYPAINT",
+            "VANDALISM/CRIMINALMISCHIEF": "SPRAYPAINT",
             "THEFTFROMVEHICLE": "CARTHEFT",
             "NARCOTIC/DRUGLAWVIOLATIONS": "PILL",
             "FRAUD": "MONEY",
@@ -650,7 +650,7 @@
         var incidents = json['grids'][gridIndex]['incidents'];
         for (var i = 0; i < incidents.length; i++) {
             var incident = incidents[i];
-            var icon = alert(incident['description'] + " ==> " + getIconForIncident(incident['description']));
+            var icon = getIconForIncident(incident['description']);
             var marker = new google.maps.Marker({
                 position: {
                     lat: incident['coordinates']['lat'],
