@@ -155,8 +155,13 @@
     <ul id="statistics" class="collapsible" style="display: none;">
         <li>
             <div id="sketchFactorStatHeader" class="collapsible-header">
-                <center><span id="sketchFactorStat">123%</span><br><span id="sketchFactorExplanationStat">crimes
-                        reported along this route.</span></center>
+                <center>
+                    <i style="font-size: 32px; text-align: center; vertical-align: center" class="material-icons" id="sentiment">sentiment_neutral</i>
+                    <br>
+                    <span id="sketchFactorStat">123%</span>
+                    <br>
+                    <span id="sketchFactorExplanationStat">crimes reported along this route.</span>
+                </center>
             </div>
         </li>
         <li>
@@ -406,6 +411,7 @@
         document.getElementById("statistics").style.display = "block";
         document.getElementById("sketchFactorStat").innerHTML = numberFormat(json['reportedIncidents']);
         document.getElementById("sketchFactorExplanationStat").innerHTML = "crimes reported along this route in 2018.";
+        document.getElementById("sentiment").innerHTML = getEmoticon();
         //alert("This route is in the " + getAveragePercentileForRoute() + "th percentile of safety.")
     }
 
@@ -549,6 +555,23 @@
             }
         }
         return percentiles.length - 1;
+    }
+
+    /// 0 12 345 67 8
+    function getEmoticon() {
+        var index = getPercentileIndex(json['reportedIncidents']/json['grids'].length,json['percentiles']);
+        switch(index) {
+            case 8: return "sentiment_very_dissatisfied";
+            case 7: return "sentiment_dissatisfied";
+            case 6: return "sentiment_dissatisfied";
+            case 5: return "sentiment_neutral";
+            case 4: return "sentiment_neutral";
+            case 3: return "sentiment_neutral";
+            case 2: return "sentiment_satisfied";
+            case 1: return "sentiment_satisfied";
+            case 0: return "sentiment_very_satisfied";
+            default: return null;
+        }
     }
 
     function getColorForPercentile(percentileIndex) {
@@ -781,8 +804,8 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         if (getUrlVars()['demo'] != undefined) {
-            document.getElementById("fromInput").value = "Temple University";
-            document.getElementById("toInput").value = "Independence Hall";
+            document.getElementById("fromInput").value = "Philadelphia International Airport";
+            document.getElementById("toInput").value = "Sugarhouse Casino";
             document.getElementById("directionsButton").disabled = false;
         }
         if (isMobile()) {
