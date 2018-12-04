@@ -206,6 +206,9 @@
 </body>
 <script>
 
+    var target = getUrlVars()['target'];
+    var campaign = getUrlVars()['campaign'];
+    
     var developerMode = false;
 
     var json = {};
@@ -388,7 +391,7 @@
     }
 
     function logRoute(from, to) {
-        fetch('https://jddk75lrxk.execute-api.us-east-1.amazonaws.com/default/sketchadelphiaRouteRequested?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
+        fetch('https://jddk75lrxk.execute-api.us-east-1.amazonaws.com/default/sketchadelphiaRouteRequested?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to) + "&campaign=" + encodeURIComponent(campaign) "&target=" + encodeURIComponent(target), {
             method: "POST",
             mode: "no-cors"
         });
@@ -797,6 +800,14 @@
 
     function isMobile() {
         return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    }
+    
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
     }
 
 </script>
