@@ -11,3 +11,4 @@ We start with the Crime Incidents Dataset from [OpenDataPhilly](https://www.open
  | 2 | 2017-12-10 04:34:00 | Theft from Vehicle | 39.993525344 | -75.23345171 |
  | 3 | 2016-08-03 15:22:00 | Aggravated Assault Firearm | 40.00125535 | -75.24001343 |
 
+We divide the city into equal size grids and count the number of crimes in each
