@@ -391,7 +391,7 @@
     }
 
     function logRoute(from, to) {
-        fetch('https://jddk75lrxk.execute-api.us-east-1.amazonaws.com/default/sketchadelphiaRouteRequested?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to) + "&campaign=" + encodeURIComponent(campaign) "&target=" + encodeURIComponent(target), {
+        fetch('https://jddk75lrxk.execute-api.us-east-1.amazonaws.com/default/sketchadelphiaRouteRequested?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to) + "&campaign=" + encodeURIComponent(campaign) + "&target=" + encodeURIComponent(target), {
             method: "POST",
             mode: "no-cors"
         });
