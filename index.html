@@ -374,13 +374,23 @@
             json = myjson;
 
             if (json['success']) {
+                
                 presentRoute();
+                logRoute(from, to);
+                
             } else {
                 M.toast({ html: json['message'] })
             }
         }).catch(function () {
             M.toast({ html: 'An unknown error occured.' });
             M.toast({ html: 'Are you sure you have internet connection?' });
+        });
+    }
+
+    function logRoute(from, to) {
+        fetch('https://jddk75lrxk.execute-api.us-east-1.amazonaws.com/default/sketchadelphiaRouteRequested?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
+            method: "POST",
+            mode: "no-cors"
         });
     }
 
