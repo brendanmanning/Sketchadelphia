@@ -54,10 +54,16 @@
 
     <meta name="description" content="How sketchy is your next drive through Philly?">
 
-    <!-- Materialize -->
+    <!-- Materialize  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- ReactJS -->
+    <script src="dist/main.js"></script>
+
+    <!-- React Components -->
+    <script src="dist/SuggestionsRow.js"></script>
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="https://brendanmanning.github.io/Sketchadelphia/mainstyle.css">
@@ -68,23 +74,21 @@
     <!-- Importing 3rd party libraries -->
     <script src="lib/polyline.js"></script>
 
-    <!-- Importing my own JS -->
-    <script src="src/Config.js"></script>
-
     <style>
         /* label focus color */
- .input-field input:focus + label {
-   color: rgb(220,220,220) !important;
- }
+        .input-field input:focus + label {
+            color: rgb(220,220,220) !important;
+        }
                        
-             .material-icons.active {
-  color: rgb(220,220,220) !important;
-  }
- /* label underline focus color */
- .row .input-field input:focus {
-   border-bottom: 1px solid rgb(220,220,220) !important;
-   box-shadow: 0 1px 0 0 rgb(220,220,220) !important
- }
+        .material-icons.active {
+            color: rgb(220,220,220) !important;
+        }
+ 
+        /* label underline focus color */
+        .row .input-field input:focus {
+            border-bottom: 1px solid rgb(220,220,220) !important;
+            box-shadow: 0 1px 0 0 rgb(220,220,220) !important
+        }
         </style>
 
 </head>
@@ -137,8 +141,6 @@
 
     </ul>
 
-
-
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
         <div class="modal-content">
@@ -151,7 +153,6 @@
     </div>
 
     <!-- Statistics Side Bar -->
-
     <ul id="statistics" class="collapsible" style="display: none;">
         <li>
             <div id="sketchFactorStatHeader" class="collapsible-header">
@@ -215,7 +216,26 @@
     <div id="map"></div>
 
 
+    <style>
+        #suggestions-row {
+            position: absolute;
+            
+            bottom: 0px;
+            left: 0px;
+
+            height: 20%;
+            width: 100%;
+
+            background-color: red;
+        }
+    </style>
+
+    <!-- <div id="suggestions-row"></div> -->
+
 </body>
+<script>
+   //ReactDOM.render(<SuggestionsRow />, document.getElementById("suggestions-row"));
+</script>
 <script>
 
     var target = getUrlVars()['target'];
