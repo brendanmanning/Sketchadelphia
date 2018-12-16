@@ -35,7 +35,7 @@
 || 
 || 
 || 
-||   MADE WITH <3 IN THE CITY OF LOVE:
+||   MADE WITH <3 IN THE CITY OF LOVE
 ||   PHILADELPHIA, PENNSYLVANIA, USA
 || 
 ||   
@@ -64,8 +64,13 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-    <!-- React Components -->
-    <script src="dist/SuggestionsRow.js"></script>
+    <!-- Importing 3rd party libraries -->
+    <script src="js/cookies.js"></script>
+    <script src="js/random.js"></script>
+    <script src="js/polyline.js"></script>
+
+    <!-- JS resources -->
+    <script src="js/ratingstars.js"></script>
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="https://brendanmanning.github.io/Sketchadelphia/mainstyle.css">
@@ -73,29 +78,72 @@
     <!-- Mobile fix -->
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
-    <!-- Importing 3rd party libraries -->
-    <script src="lib/polyline.js"></script>
-
     <style>
-        /* label focus color */
-        .input-field input:focus + label {
-            color: rgb(220,220,220) !important;
+        
+        #rating-bar {
+            
+            position: fixed;
+                        
+            z-index: 2;
+
+            height: 40px;
+            width: 160px;
+
+            bottom: 32px;
+            right: 16px;
+
+            padding: 8px;
+
+            border-radius: 4px;
+
+            background-color: rgb(12, 153, 184);
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
         }
-                       
-        .material-icons.active {
-            color: rgb(220,220,220) !important;
+
+        .star-icon {
+            color: white;
+            font-size: 24px;
         }
- 
-        /* label underline focus color */
-        .row .input-field input:focus {
-            border-bottom: 1px solid rgb(220,220,220) !important;
-            box-shadow: 0 1px 0 0 rgb(220,220,220) !important
-        }
-        </style>
+    
+    </style>
 
 </head>
 
 <body>
+    
+  <!-- Modal Structure -->
+  <div id="feedback-modal" class="modal">
+    <div class="modal-content" style="display: flex; flex-direction: row;">
+        <div style="flex: 2">
+            <img height="180" src="img/RedditAvatar.png"/>
+        </div>
+        <div style="flex: 10">
+            <div>
+                <center>
+                    <h4>Hey Reddit</h4>
+                    <p>Let me know how I'm doing!</p>
+                </center>
+            </div>
+            <div>
+                <center>
+                    <a id="rating-star-1" onmouseover="hoverStar(1)" class="modal-close waves-effect waves-green btn-flat"><i class='material-icons' style="font-size: 36px;">star_border</i></a>
+                    <a id="rating-star-2" onmouseover="hoverStar(2)" class="modal-close waves-effect waves-green btn-flat"><i class='material-icons' style="font-size: 36px;">star_border</i></a>
+                    <a id="rating-star-3" onmouseover="hoverStar(3)" class="modal-close waves-effect waves-green btn-flat"><i class='material-icons' style="font-size: 36px;">star_border</i></a>
+                    <a id="rating-star-4" onmouseover="hoverStar(4)" class="modal-close waves-effect waves-green btn-flat"><i class='material-icons' style="font-size: 36px;">star_border</i></a>
+                    <a id="rating-star-5" onmouseover="hoverStar(5)" class="modal-close waves-effect waves-green btn-flat"><i class='material-icons' style="font-size: 36px;">star_border</i></a>
+                </center>
+            </div>
+            <div class="modal-footer" style="margin-top: 16px; right: 16px; bottom: 16px;">
+                <button id="rating-submit-button" onclick="submitRating()" class="btn modal-close waves-effect waves-light" disabled="disabled">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+    
 
     <!-- FAB -->
     <div class="fixed-action-btn">
@@ -142,17 +190,6 @@
         </div>
 
     </ul>
-
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
-    </div>
 
     <!-- Statistics Side Bar -->
     <ul id="statistics" class="collapsible" style="display: none;">
@@ -202,42 +239,10 @@
         </li>
     </ul>
 
-    <!-- Modal Structure -->
-    <div id="campaign-modal" class="modal">
-        <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
-    </div>
-         
-
     <!-- Map View -->
     <div id="map"></div>
 
-
-    <style>
-        #suggestions-row {
-            position: absolute;
-            
-            bottom: 0px;
-            left: 0px;
-
-            height: 20%;
-            width: 100%;
-
-            background-color: red;
-        }
-    </style>
-
-    <!-- <div id="suggestions-row"></div> -->
-
 </body>
-<script>
-   //ReactDOM.render(<SuggestionsRow />, document.getElementById("suggestions-row"));
-</script>
 <script>
 
     var target = getUrlVars()['target'];
@@ -428,6 +433,12 @@
         fetch('https://jddk75lrxk.execute-api.us-east-1.amazonaws.com/default/sketchadelphiaRouteRequested?from=' + encodeURIComponent(from) + "&to=" + encodeURIComponent(to) + "&campaign=" + encodeURIComponent(campaign) + "&target=" + encodeURIComponent(target), {
             method: "POST",
             mode: "no-cors"
+        }).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            alert(JSON.stringify(json));
+        }).catch(function () {
+            console.error("Error logging route to AWS");
         });
     }
 
@@ -453,6 +464,14 @@
         plotDirections(json['googleResponse']);
         showRouteStatistics(json);
         gridToggled();
+        
+        // Ask them for feedback in 10 seconds
+        setTimeout(function() {
+            if(getUrlVar("campaign") == "dataisbeautiful" && !isMobile()) {
+                var instance = M.Modal.getInstance(document.getElementById('feedback-modal'));
+                instance.open();
+            }
+        }, 10000);
     }
 
     function showRouteStatistics() {
@@ -460,7 +479,6 @@
         document.getElementById("sketchFactorStat").innerHTML = numberFormat(json['reportedIncidents']);
         document.getElementById("sketchFactorExplanationStat").innerHTML = "crimes reported along this route in 2018.";
         document.getElementById("sentiment").innerHTML = getEmoticon();
-        //alert("This route is in the " + getAveragePercentileForRoute() + "th percentile of safety.")
     }
 
     function showGridStatistics() {
@@ -845,6 +863,10 @@
         return vars;
     }
 
+    function getUrlVar(v) {
+        return getUrlVars()[v];
+    }
+
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&callback=initMap&libraries=places">
 </script>
@@ -894,8 +916,8 @@
     });
     
     document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('.fixed-action-btn');
-        var instances = M.FloatingActionButton.init(elems, undefined);
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems, undefined);
     });
     
     document.addEventListener('DOMContentLoaded', function () {
@@ -913,5 +935,4 @@
     });
   
 </script>
-
 </html>
